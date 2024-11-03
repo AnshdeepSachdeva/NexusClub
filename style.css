@@ -1,0 +1,324 @@
+/*colors*/
+:root {
+    --primary-light: #F0F4F8;
+    --primary-dark: #1C3A57;
+    --accent-1: #4361EE;
+    --accent-2: #48CAE4;
+    --text-primary: #222831;
+    --text-secondary: #6C757D;
+    --surface-light: rgba(255, 255, 255, 0.95);
+    --grid-lines: #48cae469;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*grid background*/
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(var(--grid-lines) 2px, transparent 1px), 
+                      linear-gradient(90deg, var(--grid-lines) 2px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -1;
+    background-attachment: fixed;
+    background-position: 0 calc(var(--scrollY) * -0.5);
+    will-change: background-position;
+}
+
+/*parallax animation of grid*/
+@keyframes parallax {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-20px); }
+}
+
+section {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+body {
+    background-attachment: fixed;
+    background-color: var(--primary-light);
+    color: var(--text-primary);
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+    line-height: 1.6;
+    user-select:none
+}
+
+/*header*/
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    background-color: var(--surface-light);
+    color: var(--text-primary);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    height: 5rem;
+}
+
+
+
+main {
+    margin-top: 2rem;
+    padding: 2rem 5%;
+}
+
+.logo h1 {
+    font-size: 2.5rem;
+    padding: 10px;
+    color: var(--surface-light);
+}
+
+.logo :hover{
+    cursor:pointer;
+}
+
+/*gradient text border*/
+.gradient-text {
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: 0.1em;
+    background: linear-gradient(
+        to right,
+        var(--accent-1),
+        var(--accent-2),
+        #ADE8F4,
+        var(--accent-1),
+        var(--accent-2),
+        var(--accent-1)
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-stroke: 0.15em transparent;
+    background-size: 200% auto;
+    animation: gradientMove 8s linear infinite;
+    font-weight: 500;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% center; }
+    100% { background-position: -200% center; }
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-dark);
+    margin: 2px 0;
+    transition: 0.4s;
+}
+
+/*navbar*/
+nav {
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 10em;
+    padding: 0 1rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    border-left: 0.5px solid var(--accent-1);
+    border-right: 0.5px solid var(--accent-1);
+}
+
+nav a.active, nav a:hover {
+    background-color: var(--accent-2);
+    color: var(--primary-light);
+    border-radius: 4px;
+}
+
+nav ul li {
+    flex: 1;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    color: var(--accent-1);
+}
+
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-primary);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 25rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.card span {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--accent-1);
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(10px);
+}
+
+.card:hover span {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(100, 255, 218, 0.1);
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--primary-light);
+    color: var(--text-secondary);
+    margin-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: flex;
+        z-index: 100;
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: var(--surface-light);
+        padding-top: 80px;
+        transition: 0.3s;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    }
+
+    nav.active {
+        right: 0;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+}
+
+/*main description*/
+.description {
+    margin-top: 6rem;
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f0f4f81b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 800px; 
+    min-height: 50vh; 
+}
+
+.description h1 {
+    font-size: 5rem;
+    letter-spacing: 0.04em;
+    background: linear-gradient(
+        to right,
+        var(--accent-1),
+        var(--accent-2),
+        #ADE8F4,
+        var(--accent-1),
+        var(--accent-2),
+        var(--accent-1)
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: gradientMove 8s linear infinite;
+    margin: 2rem;
+    font-weight: 600;
+}
+
+.description h2,
+.description h3 {
+    color: var(--text-primary);
+    margin: 1rem 0;
+}
